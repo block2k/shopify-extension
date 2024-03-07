@@ -1,0 +1,28 @@
+{{ 'test.css' | asset_url | stylesheet_tag }}
+
+<details class="accordie-app">
+  <summary>
+    {{ block.settings.title }}
+  </summary>
+  <p>{{ block.settings.content }}</p>
+</details>
+
+{% schema %}
+  {
+    "name": "Test",
+    "target": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Tieu de",
+        "default": "Hello world!"
+      }, {
+        "type": "richtext",
+        "id": "content",
+        "label": "Noi dung",
+        "default": "<p>Hello world!</p>"
+      }
+    ]
+  }
+{% endschema %}
