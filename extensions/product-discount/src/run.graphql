@@ -10,4 +10,12 @@ query RunInput {
       }
     }
   }
+  # discountNode {
+  #   metafield(
+  #     namespace: "$app:volume-discount"
+  #     key: "function-configuration"
+  #   ) {
+  #     value
+  #   }
+  # }
 }

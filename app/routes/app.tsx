@@ -1,31 +1,40 @@
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useRouteError } from "@remix-run/react";
-import { boundary } from "@shopify/shopify-app-remix/server";
-import { AppProvider } from "@shopify/shopify-app-remix/react";
+// import { Provider as AppBridgeProvider } from '@shopify/app-bridge-react';
 import "@shopify/polaris/build/esm/styles.css";
-
+import { AppProvider } from "@shopify/shopify-app-remix/react";
+import { boundary } from "@shopify/shopify-app-remix/server";
+import { useState } from "react";
+import { DiscountProvider } from "../components/providers/DiscountProvider";
 import { authenticate } from "../shopify.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
 
-  return json({ apiKey: process.env.SHOPIFY_API_KEY || "" });
+  const url = new URL(request.url);
+
+  return json({ apiKey: process.env.SHOPIFY_API_KEY || "", host: url.searchParams.get("host") });
 };
 
 export default function App() {
-  const { apiKey } = useLoaderData<typeof loader>();
+  const { apiKey, host } = useLoaderData<typeof loader>();
+  const [config] = useState({ host, apiKey });
 
   return (
     <AppProvider isEmbeddedApp apiKey={apiKey}>
-      <ui-nav-menu>
-        <Link to="/app" rel="home">
-          Home
-        </Link>
-        <Link to="/app/additional">Additional page</Link>
-        <Link to="/app/qrcodes/new">Create QRCode</Link>
-      </ui-nav-menu>
-      <Outlet />
+      {/* <AppBridgeProvider config={config}> */}
+        <DiscountProvider>
+          <ui-nav-menu>
+            <Link to="/app" rel="home">
+              Home
+            </Link>
+            <Link to="/app/additional">Additional page</Link>
+            <Link to="/app/qrcodes/new">Create QRCode</Link>
+          </ui-nav-menu>
+          <Outlet />
+        </DiscountProvider>
+      {/* </AppBridgeProvider> */}
     </AppProvider>
   );
 }

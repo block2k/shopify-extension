@@ -80,8 +80,14 @@ async function supplementQRCode(qrCode, graphql) {
   };
 }
 
+type Errors = {
+  title?: string;
+  productId?: string;
+  destination?: string;
+};
+
 export function validateQRCode(data) {
-  const errors = {};
+  const errors: Errors = {};
 
   if (!data.title) {
     errors.title = "Title is required";

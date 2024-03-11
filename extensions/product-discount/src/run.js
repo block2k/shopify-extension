@@ -23,6 +23,8 @@ const EMPTY_DISCOUNT = {
  * @returns {FunctionRunResult}
  */
 export function run(input) {
+  console.log("🚀 ~ run ~ input:", input);
+
   const targets = input.cart.lines
     // Only include cart lines with a quantity of two or more
     // and a targetable product variant
@@ -39,6 +41,8 @@ export function run(input) {
         },
       });
     });
+
+  console.log("Targets", targets);
 
   if (!targets.length) {
     // You can use STDERR for debug logs in your function

@@ -2,7 +2,7 @@
 
 client_id = "a7a09787ec93787bd03f1716eeaa4990"
 name = "lucrative-strategy-app"
-application_url = "https://colon-reducing-ideal-chart.trycloudflare.com"
+application_url = "https://lan-harbour-bidding-myrtle.trycloudflare.com"
 embedded = true
 
 [build]
@@ -16,9 +16,9 @@ scopes = "write_discounts,write_products"
 
 [auth]
 redirect_urls = [
-  "https://colon-reducing-ideal-chart.trycloudflare.com/auth/callback",
-  "https://colon-reducing-ideal-chart.trycloudflare.com/auth/shopify/callback",
-  "https://colon-reducing-ideal-chart.trycloudflare.com/api/auth/callback"
+  "https://lan-harbour-bidding-myrtle.trycloudflare.com/auth/callback",
+  "https://lan-harbour-bidding-myrtle.trycloudflare.com/auth/shopify/callback",
+  "https://lan-harbour-bidding-myrtle.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
