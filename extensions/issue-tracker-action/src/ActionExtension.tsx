@@ -39,12 +39,11 @@ function App() {
     ? new URL(intents?.launchUrl)?.searchParams?.get("issueId")
     : null;
   const [loading, setLoading] = useState(issueId ? true : false);
-  const [issue, setIssue] = useState({ title: "", description: "", id: undefined });
+  const [issue, setIssue] = useState({ title: "", description: "", id: undefined, createdAt: new Date() });
   const [allIssues, setAllIssues] = useState([]);
   const [formErrors, setFormErrors] = useState(null);
   const { title, description, id } = issue;
   const isEditing = id !== undefined;
-  const [loadingInfo, setLoadingInfo] = useState(issueId ? true : false);
   const [loadingRecommended, setLoadingRecommended] = useState(false);
 
   useEffect(() => {
@@ -79,6 +78,7 @@ function App() {
           title,
           description,
           completed: false,
+          createdAt: new Date(),
         });
       }
       // Commit changes to the database

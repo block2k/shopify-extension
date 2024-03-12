@@ -1,5 +1,6 @@
 import {
   AdminBlock,
+  Badge,
   Box,
   Button,
   Divider,
@@ -114,7 +115,7 @@ function App() {
         {issues.length ? (
           <>
             {paginatedIssues.map(
-              ({ id, title, description, completed }, index) => {
+              ({ id, title, description, completed, createdAt }, index) => {
                 return (
                   <>
                     {index > 0 && <Divider />}
@@ -128,9 +129,23 @@ function App() {
                           <Box inlineSize="100%">
                             <Text fontWeight="bold" textOverflow="ellipsis">{title}</Text>
                           </Box>
-
                           <Box inlineSize="100%">
                             <Text textOverflow="ellipsis">{description}</Text>
+                          </Box>
+                          <Box inlineSize="100%">
+                            {
+                              completed && (
+                                <Badge
+                                  tone="success"
+                                >
+                                  Completed
+                                </Badge>
+                              )}
+                            <Badge
+                              tone="info"
+                            >
+                              {new Date(createdAt).toLocaleDateString()}
+                            </Badge>
                           </Box>
                         </Box>
                         <Box inlineSize="22%">

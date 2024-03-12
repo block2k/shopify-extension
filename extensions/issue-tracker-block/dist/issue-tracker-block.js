@@ -19124,6 +19124,9 @@
   // node_modules/@shopify/ui-extensions/build/esm/surfaces/admin/components/AdminBlock/AdminBlock.mjs
   var AdminBlock = createRemoteComponent("AdminBlock");
 
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/admin/components/Badge/Badge.mjs
+  var Badge = createRemoteComponent("Badge");
+
   // node_modules/@shopify/ui-extensions/build/esm/surfaces/admin/components/Box/Box.mjs
   var Box = createRemoteComponent("Box");
 
@@ -19450,6 +19453,9 @@
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/components/AdminBlock/AdminBlock.mjs
   var AdminBlock2 = createRemoteReactComponent(AdminBlock);
 
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/components/Badge/Badge.mjs
+  var Badge2 = createRemoteReactComponent(Badge);
+
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/components/Box/Box.mjs
   var Box2 = createRemoteReactComponent(Box);
 
@@ -19478,7 +19484,7 @@
   var Text2 = createRemoteReactComponent(Text);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/hooks/api.mjs
-  var import_react17 = __toESM(require_react(), 1);
+  var import_react18 = __toESM(require_react(), 1);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/errors.mjs
   var AdminUIExtensionError = class extends Error {
@@ -19490,7 +19496,7 @@
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/admin/hooks/api.mjs
   function useApi(_target) {
-    const api = (0, import_react17.useContext)(ExtensionApiContext);
+    const api = (0, import_react18.useContext)(ExtensionApiContext);
     if (api == null) {
       throw new AdminUIExtensionError("No extension api found.");
     }
@@ -19498,7 +19504,7 @@
   }
 
   // extensions/issue-tracker-block/src/BlockExtension.tsx
-  var import_react18 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
 
   // extensions/issue-tracker-block/src/utils.ts
   function updateIssues(id, newIssues) {
@@ -19570,14 +19576,14 @@
   var PAGE_SIZE = 3;
   function App() {
     const { data, i18n, navigation } = useApi(TARGET);
-    const [loading, setLoading] = (0, import_react18.useState)(true);
-    const [initialValues, setInitialValues] = (0, import_react18.useState)([]);
-    const [issues, setIssues] = (0, import_react18.useState)([]);
-    const [currentPage, setCurrentPage] = (0, import_react18.useState)(1);
+    const [loading, setLoading] = (0, import_react19.useState)(true);
+    const [initialValues, setInitialValues] = (0, import_react19.useState)([]);
+    const [issues, setIssues] = (0, import_react19.useState)([]);
+    const [currentPage, setCurrentPage] = (0, import_react19.useState)(1);
     const productId = data.selected[0].id;
     const issuesCount = issues.length;
     const totalPages = issuesCount / PAGE_SIZE;
-    (0, import_react18.useEffect)(() => {
+    (0, import_react19.useEffect)(() => {
       (function getProductInfo() {
         return __async(this, null, function* () {
           var _a, _b, _c;
@@ -19595,7 +19601,7 @@
         });
       })();
     }, [productId]);
-    const paginatedIssues = (0, import_react18.useMemo)(() => {
+    const paginatedIssues = (0, import_react19.useMemo)(() => {
       if (issuesCount <= PAGE_SIZE) {
         return issues;
       }
@@ -19635,7 +19641,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { children: "Issues" }),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Form2, { id: `issues-form`, onSubmit, onReset, children: issues.length ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
             paginatedIssues.map(
-              ({ id, title, description, completed }, index) => {
+              ({ id, title, description, completed, createdAt }, index) => {
                 return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
                   index > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Divider2, {}),
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Box2, { padding: "base small", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
@@ -19647,7 +19653,23 @@
                       children: [
                         /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Box2, { inlineSize: "53%", children: [
                           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Box2, { inlineSize: "100%", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { fontWeight: "bold", textOverflow: "ellipsis", children: title }) }),
-                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Box2, { inlineSize: "100%", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { textOverflow: "ellipsis", children: description }) })
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Box2, { inlineSize: "100%", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { textOverflow: "ellipsis", children: description }) }),
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Box2, { inlineSize: "100%", children: [
+                            completed && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                              Badge2,
+                              {
+                                tone: "success",
+                                children: "Completed"
+                              }
+                            ),
+                            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                              Badge2,
+                              {
+                                tone: "info",
+                                children: new Date(createdAt).toLocaleDateString()
+                              }
+                            )
+                          ] })
                         ] }),
                         /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Box2, { inlineSize: "22%", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
                           Select2,
