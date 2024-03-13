@@ -31,6 +31,7 @@ export default function App() {
             </Link>
             <Link to="/app/additional">Additional page</Link>
             <Link to="/app/qrcodes/new">Create QRCode</Link>
+            <Link to="/app/products/reviews">Product Reviews</Link>
           </ui-nav-menu>
           <Outlet />
         </DiscountProvider>

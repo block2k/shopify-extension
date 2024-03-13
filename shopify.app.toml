@@ -2,7 +2,7 @@
 
 client_id = "a7a09787ec93787bd03f1716eeaa4990"
 name = "lucrative-strategy-app"
-application_url = "https://lan-harbour-bidding-myrtle.trycloudflare.com"
+application_url = "https://courage-seniors-signup-six.trycloudflare.com"
 embedded = true
 
 [build]
@@ -12,13 +12,13 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_discounts,write_products"
+scopes = "customer_read_customers,write_discounts,write_products"
 
 [auth]
 redirect_urls = [
-  "https://lan-harbour-bidding-myrtle.trycloudflare.com/auth/callback",
-  "https://lan-harbour-bidding-myrtle.trycloudflare.com/auth/shopify/callback",
-  "https://lan-harbour-bidding-myrtle.trycloudflare.com/api/auth/callback"
+  "https://courage-seniors-signup-six.trycloudflare.com/auth/callback",
+  "https://courage-seniors-signup-six.trycloudflare.com/auth/shopify/callback",
+  "https://courage-seniors-signup-six.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

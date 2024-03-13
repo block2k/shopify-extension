@@ -5,6 +5,8 @@
 
   const stars = document.querySelectorAll(".rate i");
 
+  {{product.title}}
+
   // add event listener to each star
   stars.forEach((star, index) => {
     star.addEventListener("click", () => {

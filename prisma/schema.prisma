@@ -32,3 +32,16 @@ model QRCode {
   scans            Int      @default(0)
   createdAt        DateTime @default(now())
 }
+
+model ProductReview {
+  id           Int      @id @default(autoincrement())
+  productId    String
+  productTitle String
+  userEmail    String
+  userName     String
+  userId       String
+  shopId       String
+  rating       Int
+  comment      String?
+  createdAt    DateTime @default(now())
+}
