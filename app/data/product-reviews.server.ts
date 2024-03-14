@@ -12,18 +12,19 @@ type ProductReview = {
 };
 
 export async function getProductReviews(shopId: string) {
-  // const reviews = await db.productReview.findMany({
-  //   where: {
-  //     shopId
-  //   }
-  // });
-
-  // select distinct on productId
-  const reviews = await db.productReview.findMany({
+  // SELECT AVG( rating ), * FROM "ProductReview" WHERE shopId = 'longbd6-hamsa.myshopify.com' GROUP BY productId
+  // SELECT AVG( rating ), * FROM "ProductReview" WHERE shopId = 'longbd6-hamsa.myshopify.com' GROUP BY productId
+  const reviews = await db.productReview.groupBy({
+    by: ['productId'],
+    _avg: {
+      rating: true
+    },
+    _count: {
+      productId: true
+    },
     where: {
       shopId
     },
-    distinct: ['productId']
   });
 
   const averageRating = await db.productReview.aggregate({

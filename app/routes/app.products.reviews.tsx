@@ -13,18 +13,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function AppProductsReviews() {
   const loaderData = useLoaderData<typeof loader>();
+  console.log("🚀 ~ AppProductsReviews ~ loaderData:", loaderData)
   const rows = loaderData.reviews.map((review) => {
     return [
       <Link
         removeUnderline
         url={`${review.productId}`}
       >
-        {review.productTitle}
+        {review.productId}
       </Link>,
-      review.userEmail,
-      review.userName,
-      review.rating + ' stars',
-      new Date(review.createdAt).toLocaleDateString(),
+      review._avg.rating.toFixed(1) + ' stars',
+      review._count.productId
     ];
   });
 
@@ -35,20 +34,16 @@ export default function AppProductsReviews() {
           showTotalsInFooter
           columnContentTypes={[
             'text',
-            'text',
-            'text',
             'numeric',
-            'text',
+            'numeric',
           ]}
           headings={[
-            'Product',
-            'User Email',
-            'User Name',
-            'Rating',
-            'Date',
+            'Product ID',
+            'Average Rating',
+            'Number of Reviews'
           ]}
           rows={rows}
-          totals={['', '', '', '', `${loaderData.averageRating.toFixed(1)} stars`]}
+          totals={['', '', `${loaderData.averageRating.toFixed(1)} stars`]}
           totalsName={{
             singular: 'Average rating',
             plural: 'Average rating',
