@@ -1,0 +1,105 @@
+{{ 'star-rating.css' | asset_url | stylesheet_tag }}
+
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+
+<div class="product-review-form-v2">
+  <h2>{{ block.settings.heading }}</h2>
+  <form method="post" action="/">
+    <div class="star-rating">
+      {% for i in (1..5) reversed %}
+        <input
+          type="radio"
+          name="rating"
+          value="{{ i }}"
+          id="rating-{{ i }}"
+          {% if i == 5 %}
+          checked{% endif %}>
+        <label for="rating-{{ i }}" title="{{ i }} stars">
+          <i class="fa fa-star"></i>
+        </label>
+      {% endfor %}
+    </div>
+    <p>Your name: {{ customer.name }}</p>
+    <p>Your email: {{ customer.email }}</p>
+    <textarea
+      name="review"
+      placeholder="Write your feedback here..."
+      required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.product-review-form-v2 form').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      const SERVER_URL = 'http://localhost:8002'
+  
+      // Capture the review details
+      var rating = document.querySelector('input[name="rating"]:checked').value;
+      var reviewText = document.querySelector('textarea[name="review"]').value;
+   
+      // Prepare data to be sent to your server
+      var reviewData = JSON.stringify({
+        productId: '{{ product.id }}',
+        userId: '{{ customer.id }}',
+        shopId: '{{ shop.permanent_domain }}',
+        rating: rating,
+        comment: reviewText,
+      });
+  
+      console.log(reviewData)
+  
+      fetch(SERVER_URL + '/api/products/metafields/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: reviewData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Handle success
+        // show user info that review has been submitted
+        document.querySelector('.product-review-form-v2').innerHTML = '<p>Thank you for your review!</p>';
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error submitting review:', error);
+        alert('Failed to submit review. Please try again.');
+      });
+    });
+  });
+</script>
+
+
+{% comment %} <script src="{{ 'star-rating.js' | asset_url }}" defer></script> {% endcomment %}
+
+{% schema %}
+  {
+    "name": "Product Reviews V2",
+    "templates": ["product"],
+    "target": "section",
+    "settings": [
+      {
+        "id": "heading",
+        "type": "text",
+        "label": "Customer Reviews Heading",
+        "default": "Customer Reviews V2"
+      }, {
+        "id": "product",
+        "type": "product",
+        "label": "t:blocks.product-reviews.settings.product.label",
+        "autofill": true
+      }
+    ]
+  }
+{% endschema %}

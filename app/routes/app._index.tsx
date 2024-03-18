@@ -18,6 +18,7 @@ import { getQRCodes } from "../models/QRCode.server";
 
 export async function loader({ request }) {
   const { admin, session } = await authenticate.admin(request);
+  console.log("🚀 ~ loader ~ admin:", admin)
   const qrCodes = await getQRCodes(session.shop, admin.graphql);
 
   return json({

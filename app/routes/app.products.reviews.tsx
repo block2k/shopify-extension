@@ -13,7 +13,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function AppProductsReviews() {
   const loaderData = useLoaderData<typeof loader>();
-  console.log("🚀 ~ AppProductsReviews ~ loaderData:", loaderData)
   const rows = loaderData.reviews.map((review) => {
     return [
       <Link

@@ -2,7 +2,7 @@
 
 client_id = "a7a09787ec93787bd03f1716eeaa4990"
 name = "lucrative-strategy-app"
-application_url = "https://courage-seniors-signup-six.trycloudflare.com"
+application_url = "https://posting-situations-damage-az.trycloudflare.com"
 embedded = true
 
 [build]
@@ -16,9 +16,9 @@ scopes = "customer_read_customers,write_discounts,write_products"
 
 [auth]
 redirect_urls = [
-  "https://courage-seniors-signup-six.trycloudflare.com/auth/callback",
-  "https://courage-seniors-signup-six.trycloudflare.com/auth/shopify/callback",
-  "https://courage-seniors-signup-six.trycloudflare.com/api/auth/callback"
+  "https://posting-situations-damage-az.trycloudflare.com/auth/callback",
+  "https://posting-situations-damage-az.trycloudflare.com/auth/shopify/callback",
+  "https://posting-situations-damage-az.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

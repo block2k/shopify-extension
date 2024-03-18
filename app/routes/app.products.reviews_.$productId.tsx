@@ -20,13 +20,12 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export default function ReviewsPage() {
   const loaderData = useLoaderData<typeof loader>();
-  console.log("🚀 ~ ListReviewsByProductPage ~ loaderData:", loaderData)
 
   return (
     <Page>
       <Layout.Section>
         <Card>
-          <BlockStack gap='500'>
+          <BlockStack gap='400'>
             <Text as={"h2"} variant="headingLg">
               Product ID: {loaderData.productId}
             </Text>
